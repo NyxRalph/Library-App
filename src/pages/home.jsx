@@ -5,13 +5,17 @@ import Featured from "../components/Featured";
 import Discounted from "../components/Discounted";
 import Explore from "../components/Explore";
 
+import Testimonials from "../components/Testimonials";
+
 const Home = () => {
   return (
     <>
       <Landing />
+
       <Highlights />
       <Featured />
       <Discounted />
+      <Testimonials />
       <Explore />
     </>
   );
