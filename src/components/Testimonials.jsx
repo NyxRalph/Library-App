@@ -1,4 +1,5 @@
 import React from "react";
+import reading from "../assets/Online Reading Illustration.svg"
 
 const testimonials = [
   {
@@ -27,7 +28,8 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <section className="testimonials">
-      <div className="row">
+      <div className="testimonials__row">
+        <div className="testimonials__text__column">
         <div className="testimonials__header">
           <h2 className="section__title">What readers are saying</h2>
           <p className="section__subtitle">
@@ -54,6 +56,13 @@ const Testimonials = () => {
             );
           })}
         </div>
+       
+        </div>
+       
+
+       <div className="testimonials__img__wrapper">
+        <img  src={reading} alt="Photo" />
+       </div>
       </div>
     </section>
   );
