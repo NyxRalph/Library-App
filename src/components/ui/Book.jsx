@@ -15,10 +15,10 @@ const Book = ({ book }) => {
         <Link to={`/books/${book.id}`} className="book__title--link">
           {book.title}
         </Link>
-      {/* </div>
+      </div>
       <Rating rating={book.rating} />
       <Price originalPrice={book.originalPrice} salesPrice={book.salesPrice} />
-    </div> */}
+    </div>
   );
 };
 
