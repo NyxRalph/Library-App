@@ -51,9 +51,9 @@ function App() {
     setCart((cart) => cart.filter((book) => book.id !== item.id));
   }
 
-  // function numberOfItems() {
-  //   return cart.reduce((total, item) => total + item.quantity, 0);
-  // }
+  function numberOfItems() {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  }
 
   useEffect(() => {
     console.log(cart);
