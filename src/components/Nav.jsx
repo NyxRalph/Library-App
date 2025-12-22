@@ -24,9 +24,9 @@ const Nav = ({ cartCount = 0 }) => {
             </Link>
           </li>
           <li className="nav__list">
-            {/* <Link to="/books" className="nav__link">
+            <Link to="/books" className="nav__link">
               Books
-            </Link> */}
+            </Link>
           </li>
           <button className="btn__menu" onClick={openMenu}>
             <FontAwesomeIcon icon="bars" />
