@@ -23,11 +23,11 @@ const Nav = ({ cartCount = 0 }) => {
               Home
             </Link>
           </li>
-          <li className="nav__list">
+          {/* <li className="nav__list">
             <Link to="/books" className="nav__link">
               Books
             </Link>
-          </li>
+          </li> */}
           <button className="btn__menu" onClick={openMenu}>
             <FontAwesomeIcon icon="bars" />
           </button>
