@@ -12,9 +12,9 @@ const Book = ({ book }) => {
         </figure>
       </Link>
       <div className="book__title">
-        <Link to={`/books/${book.id}`} className="book__title--link">
+        {/* <Link to={`/books/${book.id}`} className="book__title--link">
           {book.title}
-        </Link>
+        </Link> */}
       </div>
       <Rating rating={book.rating} />
       <Price originalPrice={book.originalPrice} salesPrice={book.salesPrice} />
