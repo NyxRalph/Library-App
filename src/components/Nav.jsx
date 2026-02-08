@@ -36,9 +36,7 @@ const Nav = ({ cartCount = 0 }) => {
             <Link to="/cart" className="nav__link">
               <FontAwesomeIcon icon="shopping-cart" />
             </Link>
-            {cartCount > 0 && (
-              <span className="cart__length">{cartCount}</span>
-            )}
+            {cartCount > 0 && <span className="cart__length">{cartCount}</span>}
           </li>
         </ul>
         <div className="menu__backdrop">
