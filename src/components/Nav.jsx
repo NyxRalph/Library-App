@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LibraryLogo from "../assets/library.svg.svg";
 import { Link } from "react-router-dom";
 
 const Nav = ({ cartCount = 0 }) => {
-  function openMenu() {
-    document.body.classList += " menu--open";
-  }
-  function closeMenu() {
+  const openMenu = useCallback(() => {
+    document.body.classList.add("menu--open");
+  }, []);
+
+  const closeMenu = useCallback(() => {
     document.body.classList.remove("menu--open");
-  }
+  }, []);
 
   return (
     <nav>
       <div className="nav__container">
         <Link to="/">
-          <img src={LibraryLogo} alt="" className="logo" />
+          <img src={LibraryLogo} alt="Library Logo" className="logo" />
         </Link>
         <ul className="nav__links">
           <li className="nav__list">
@@ -67,4 +68,4 @@ const Nav = ({ cartCount = 0 }) => {
   );
 };
 
-export default Nav;
+export default React.memo(Nav);

@@ -8,7 +8,7 @@ const Book = ({ book }) => {
     <div className="book">
       <Link to={`/books/${book.id}`}>
         <figure className="book__img--wrapper">
-          <img src={book.url} className="book__img" alt="" />
+          <img src={book.url} className="book__img" alt={book.title} loading="lazy" />
         </figure>
       </Link>
       <div className="book__title">
@@ -22,4 +22,4 @@ const Book = ({ book }) => {
   );
 };
 
-export default Book;
+export default React.memo(Book);

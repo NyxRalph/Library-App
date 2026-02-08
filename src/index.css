@@ -109,11 +109,18 @@ button:active {
   border: none;
   font-weight: 600;
   box-shadow: var(--shadow-soft);
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
+  transform: translateY(-1px);
 }
 
 .btn--glow {
@@ -175,7 +182,23 @@ button:active {
   padding: 8px 12px;
   color: var(--color-text);
   border-radius: var(--radius-sm);
-  transition: var(--transition-base);
+  transition: all 300ms ease;
+  position: relative;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 300ms ease;
+}
+
+.nav__link:hover::after {
+  width: 100%;
 }
 
 .nav__list {
@@ -290,11 +313,8 @@ LANDING
 */
 
 #landing {
-  background: radial-gradient(
-      circle at 20% 20%,
-      #6d5dea1f,
-      transparent 50%
-    ),
+  background:
+    radial-gradient(circle at 20% 20%, #6d5dea1f, transparent 50%),
     radial-gradient(circle at 80% 0%, rgba(255, 159, 28, 0.12), transparent 45%);
 }
 
@@ -478,11 +498,8 @@ LANDING
 }
 
 .hero__texture {
-  background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.06) 25%,
-      transparent 25%
-    ),
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
     linear-gradient(225deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
     linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
     linear-gradient(
@@ -521,17 +538,16 @@ LANDING
   margin: 0 auto;
   padding: 0 24px;
 
-  align-items: center;justify-content: space-around;
+  align-items: center;
+  justify-content: space-around;
 }
 .testimonials__row {
   max-width: 1420px;
   margin: 0 auto;
   padding: 0 24px;
 
-
   display: flex;
   flex-direction: row;
-
 
   align-items: center;
   justify-content: flex-end;
@@ -770,7 +786,7 @@ FEATURES
 .testimonials__grid {
   display: flex;
   flex-direction: column;
- 
+
   gap: 24px;
 }
 
@@ -808,22 +824,23 @@ FEATURES
   font-weight: 600;
   color: var(--color-text);
 }
-.testimonials__text__column{
-    display: flex;
-    flex-direction: column;
-    width: 38%;
+.testimonials__text__column {
+  display: flex;
+  flex-direction: column;
+  width: 38%;
 }
-.testimonials__img__wrapper{
-    width: 65%;
-    height: 60vh;
-    background: linear-gradient(
-        120deg,
-        rgba(108, 92, 231, 0.95),
-        rgba(86, 201, 255, 0.7)
-      );
-      border-radius: 8px;
-      display: flex;align-items: center;
-      justify-content: center;
+.testimonials__img__wrapper {
+  width: 65%;
+  height: 60vh;
+  background: linear-gradient(
+    120deg,
+    rgba(108, 92, 231, 0.95),
+    rgba(86, 201, 255, 0.7)
+  );
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .books {
   display: flex;
@@ -851,7 +868,6 @@ FEATURES
 
 .carousel-wrapper .book {
   flex-shrink: 0;
-
 }
 
 /* Left to Right Animation (Featured Books) - Books coming from left, disappearing to right */
@@ -898,17 +914,47 @@ FEATURES
 .book {
   /* width: 25%; */
   padding: 24px;
-  transition: all 300ms ease;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.book::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(108, 92, 231, 0.05) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
 }
 
 .book:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.book:hover::before {
+  opacity: 1;
 }
 
 .book__img {
   max-height: 320px;
   max-width: 250px;
-  transition: all 300ms ease;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-sm);
+  filter: brightness(1);
+}
+
+.book:hover .book__img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 .book__img--skeleton {
@@ -945,14 +991,21 @@ FEATURES
 
 .book__img--wrapper {
   margin-bottom: 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
+  background: var(--color-surface-soft);
+  transition: all 300ms ease;
 }
 
 .book__title {
   font-size: 20px;
   margin-bottom: 8px;
+  transition: color 300ms ease;
+}
+
+.book:hover .book__title {
+  color: var(--color-primary);
 }
 
 .book__title--link {
@@ -1533,7 +1586,6 @@ CART
   .testimonials__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 }
 
 /* SMALL PHONES , LARGE SMARTPHONES */

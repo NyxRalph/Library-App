@@ -6,62 +6,52 @@ import { books } from "./data";
 import Bookinfo from "./pages/Bookinfo";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
-import { useState, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 function App() {
   const [cart, setCart] = useState([]);
 
-  function addToCart(book) {
-    const dupeItem = cart.find((item) => +item.id === +book.id);
-    if (dupeItem) {
-      dupeItem.quantity += 1;
-      setCart(
-        cart.map((item) => {
-          if (item.id === dupeItem.id) {
-            return {
-              ...item,
-              quantity: item.quantity + 1,
-            };
-          } else {
-            return item;
-          }
-        })
-      );
-    } else {
-      setCart([...cart, { ...book, quantity: 1 }]);
-    }
-  }
+  const addToCart = useCallback((book) => {
+    setCart((prevCart) => {
+      const dupeItem = prevCart.find((item) => +item.id === +book.id);
+      if (dupeItem) {
+        return prevCart.map((item) =>
+          item.id === dupeItem.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        );
+      } else {
+        return [...prevCart, { ...book, quantity: 1 }];
+      }
+    });
+  }, []);
 
-  function changeQuantity(book, quantity) {
-    setCart((cart) =>
-      cart
+  const changeQuantity = useCallback((book, quantity) => {
+    setCart((prevCart) =>
+      prevCart
         .map((item) =>
           item.id === book.id
-            ? {
-                ...item,
-                quantity: quantity > 0 ? quantity : 0,
-              }
-            : item
+            ? { ...item, quantity: quantity > 0 ? quantity : 0 }
+            : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
-  }
+  }, []);
 
-  function removeItem(item) {
-    setCart((cart) => cart.filter((book) => book.id !== item.id));
-  }
+  const removeItem = useCallback((item) => {
+    setCart((prevCart) => prevCart.filter((book) => book.id !== item.id));
+  }, []);
 
-  function numberOfItems() {
+  const numberOfItems = useCallback(() => {
     return cart.reduce((total, item) => total + item.quantity, 0);
-  }
-
-  useEffect(() => {
-    console.log(cart);
   }, [cart]);
+
+  const cartCount = useMemo(() => numberOfItems(), [numberOfItems]);
+
   return (
     <Router>
       <div className="App">
-        <Nav cartCount={numberOfItems()} />
+        <Nav cartCount={cartCount} />
         <Route path="/" exact component={Home} />
         <Route path="/books" exact render={() => <Books books={books} />} />
         <Route
