@@ -10,7 +10,7 @@ const Discounted = () => {
   return (
     <section id="recent">
       <div className="container">
-        {/* <div className="row">
+        <div className="row">
           <h2 className="section__title">
             Discounted <span className="purple"> Books</span>
           </h2>
@@ -21,7 +21,7 @@ const Discounted = () => {
               ))}
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   );
